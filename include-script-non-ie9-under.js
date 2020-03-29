@@ -1,0 +1,2 @@
+// only for modern browsers and IE10+, http://caniuse.com/#feat=script-async
+<script src="http://www.kelf.co.nz/fids/flightswidget/fids-flights.min.js" id="fids-flights-script" data-skins="flat" async></script>

@@ -1,0 +1,1 @@
+FIDS-96, replace pure JS selectors with jquery

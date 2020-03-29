@@ -1,0 +1,103 @@
+<div class="fids-flights-container fids-departures {{options.skin}}">
+
+	{{#if options.tabs}}<div class="fids-tabs">{{/if}}
+		{{#if options.tabs}}<div class="fids-tab">{{/if}}
+			{{#if options.tabs}}<a class="fids-tab-button" href="javascript:void(0)">Departures</a>{{/if}}
+			 {{#if options.tabs}}<div class="fids-tab-content">{{/if}}
+				<table class="fids-table" {{#if options.fontSize}}style="font-size: {{options.fontSize}}px"{{/if}}>
+					<colgroup class="fids-col-airline"</colgroup>
+					<colgroup class="fids-col-city"></colgroup>
+					<colgroup class="fids-col-sched-time"></colgroup>
+					<colgroup class="fids-col-status"></colgroup>
+					<thead>
+						<th class="logo"><span class="icon icon-aircraft-take-off"></span></th>
+						<th>Departing to</th>
+						<th>Time</th>
+						<th>Status</th>
+					</thead>
+					<tbody>
+						{{#if error}}
+							<tr>
+								<td colspan="4">
+									Your request cannot be serviced at this time
+								</td>
+							</tr>
+						{{else}}
+							{{#each departures}}
+							<tr>
+								<td class="fids-airline-image">
+									<img class="svg fids-airline-logo" src="{{airlineImage}}" title="{{airline}}" />
+								</td>
+								<td>
+									<div class="fids-city">{{city}}</div>
+									<div class="{{marquee}}">
+										<div class="fids-flight-no">{{flight_no}}</div>
+										{{#if codeshares.length}}<span>, </span><div class="fids-codeshares"><ul>{{#each codeshares}}<li>{{this}}</li>{{/each}}</ul></div>{{/if}}
+									</div>
+								</td>
+								<td class="fids-sched-time">{{sched_time}}</td>
+								<td class="fids-status">{{status}}</td>
+							</tr>
+							{{else}}
+								<tr>
+									<td colspan="4">No flights departing soon</td>
+								</tr>
+							{{/each}}
+						{{/if}}
+					</tbody>
+				</table>
+			{{#if options.tabs}}</div>{{/if}}
+		{{#if options.tabs}}</div>{{/if}}
+
+		{{#if options.tabs}}<div class="fids-tab">{{/if}}
+			{{#if options.tabs}}<a class="fids-tab-button" href="javascript: void(0)">Arrivals</a>{{/if}}
+			{{#if options.tabs}}<div class="fids-tab-content">{{/if}}
+				<table class="fids-table" {{#if options.fontSize}}style="font-size: {{options.fontSize}}px"{{/if}}>
+					<colgroup class="fids-col-airline"</colgroup>
+					<colgroup class="fids-col-city"></colgroup>
+					<colgroup class="fids-col-sched-time"></colgroup>
+					<colgroup class="fids-col-status"></colgroup>
+					<thead>
+						<th class="logo"><span class="icon icon-aircraft-landing"></span></th>
+						<th>Arriving from</th>
+						<th>Time</th>
+						<th>Status</th>
+					</thead>
+					<tbody>
+						{{#if error}}
+							<tr>
+								<td colspan="4">
+									Your request cannot be serviced at this time
+								</td>
+							</tr>
+						{{else}}
+							{{#each arrivals}}
+							<tr>
+								<td class="fids-airline-image">
+									<img class="fids-airline-logo" src="{{airlineImage}}" title="{{airline}}" />
+								</td>
+								<td>
+									<div class="fids-city">{{city}}</div>
+									<div class="{{marquee}}">
+										<div class="fids-flight-no">{{flight_no}}</div>
+										{{#if codeshares.length}}<span>, </span><div class="fids-codeshares"><ul>{{#each codeshares}}<li>{{this}}</li>{{/each}}</ul></div>{{/if}}
+									</div>
+								</td>
+								<td class="fids-sched-time">{{sched_time}}</td>
+								<td class="fids-status">{{status}}</td>
+							</tr>
+							{{else}}
+								<tr>
+									<td colspan="4">No flights arriving soon</td>
+								</tr>
+							{{/each}}
+						{{/if}}
+					</tbody>
+				</table>
+			{{#if options.tabs}}</div>{{/if}}
+		{{#if options.tabs}}</div>{{/if}}
+	{{#if options.tabs}}</div>{{/if}}
+	<div class="fids-flights-footer">
+		Flight information is displayed for the previous hour and up to the next 12 hours, depending on airline <span title="" class="fids-info" data-tip="Powered by Symbiant Systems" data-mode="top">i</span><br/>
+	Last Updated: {{produced}} </div>
+</div>

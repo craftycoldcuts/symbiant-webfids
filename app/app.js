@@ -100,6 +100,10 @@ function ($fids, _, Backbone, Handlebars, tabs, tipr, flightsTemplate, css) {
 
   originalSync = Backbone.sync;
 
+
+  /**
+   * Handlebars helpers
+   */
   Handlebars.registerHelper('airlineImage', function(options) {
     var myNav = navigator.userAgent.toLowerCase();
     var ie = (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
@@ -118,19 +122,38 @@ function ($fids, _, Backbone, Handlebars, tabs, tipr, flightsTemplate, css) {
     }
   });
 
-    Handlebars.registerHelper('produced', function(options) {
-      var producedString = this.produced;
-      var sep = " ";
-      var dateStr = producedString.substring(0, producedString.indexOf(sep));
-      var timeStr = producedString.substring(producedString.indexOf(sep) + 1, producedString.lastIndexOf(":"));
-      var dateMod = "";
-      var date = new Date(dateStr);
-      if (!isNaN(date.getTime())) {
-          // Months use 0 index.
-          dateMod = date.getDate() + '/' + parseInt(date.getMonth() + 1) + '/' + date.getFullYear();
-      }
-      return dateMod + sep + timeStr;
+  Handlebars.registerHelper('produced', function(options) {
+    var producedString = this.produced;
+    var sep = " ";
+    var dateStr = producedString.substring(0, producedString.indexOf(sep));
+    var timeStr = producedString.substring(producedString.indexOf(sep) + 1, producedString.lastIndexOf(":"));
+    var dateMod = "";
+    var date = new Date(dateStr);
+    if (!isNaN(date.getTime())) {
+        // Months use 0 index.
+        dateMod = date.getDate() + '/' + parseInt(date.getMonth() + 1) + '/' + date.getFullYear();
+    }
+    return dateMod + sep + timeStr;
   });
+
+  Handlebars.registerHelper('getActualTime', function () {
+    var row = this;
+    if (row.actual_time !== "" && row.actual_time !== undefined) {
+      return row.actual_time;
+    }
+  
+    if (row.est_time !== "" && row.est_time !== undefined) {
+      return row.est_time;
+    }
+  
+    if (row.sched_time !== "" && row.sched_time !== undefined) {
+      return row.sched_time;
+    }
+  
+    return "";
+  });
+
+  /* HANDLEBARS HELPERS - END */
 
   Backbone.sync = function (method, model, options) {
     if (method === "read") {
@@ -146,6 +169,9 @@ function ($fids, _, Backbone, Handlebars, tabs, tipr, flightsTemplate, css) {
 
 });
 
+/**
+ * This is just for the Symbiant Systems tooltip at the bottom of the table
+ */
 (function($){$.fn.tipr=function(options){var set=$.extend({'speed':200,'mode':'bottom'},options);return this.each(function(){var tipr_cont='.tipr_container_'+set.mode;$(this).hover(function()
 {var d_m=set.mode;if($(this).attr('data-mode'))
 {d_m=$(this).attr('data-mode')

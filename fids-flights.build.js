@@ -13,6 +13,6 @@
   out: "fids-flights.min.js",
   optimizeCss: "standard",
   // uncomment when in development
-	//optimize: "none",
+	// optimize: "none",
   stubModules: ['text']
 })

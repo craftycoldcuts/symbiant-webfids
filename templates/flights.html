@@ -12,7 +12,13 @@
 					<thead>
 						<th class="logo"><span class="icon icon-aircraft-take-off"></span></th>
 						<th>Departing to</th>
+						{{#if options.columns.departures.date}}
+						<th>{{options.columns.departures.date.label}}</th>
+						{{/if}}
 						<th>Time</th>
+						{{#if options.columns.departures.est}}
+						<th>{{options.columns.departures.est.label}}</th>
+						{{/if}}
 						<th>Status</th>
 					</thead>
 					<tbody>
@@ -35,7 +41,13 @@
 										{{#if codeshares.length}}<span>, </span><div class="fids-codeshares"><ul>{{#each codeshares}}<li>{{this}}</li>{{/each}}</ul></div>{{/if}}
 									</div>
 								</td>
+								{{#if ../options.columns.departures.date}}
+								<td>{{#getActualTime}}{{/getActualTime}}</td>
+								{{/if}}
 								<td class="fids-sched-time">{{sched_time}}</td>
+								{{#if ../options.columns.departures.est}}
+								<td>{{#getActualTime}}{{/getActualTime}}</td>
+								{{/if}}
 								<td class="fids-status">{{status}}</td>
 							</tr>
 							{{else}}

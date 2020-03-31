@@ -17,6 +17,7 @@ function ($fids) {
   var tabClass       = 'fids-tab';
   var tabButtonClass = 'fids-tab-button';
   var activeClass    = 'fids-active';
+  var activeTab    = (options.activeTab === undefined ? 0 : options.activeTab )
 
 
   var tabs = {
@@ -32,8 +33,10 @@ function ($fids) {
         /* List of tabs for this tabbed container */
         var tabList = tabbedContainer.querySelectorAll('.'+tabClass)
 
+        var activeTabMax = Math.min(tabList.length-1, activeTab);
+
         /* Make the first tab active when the page loads */
-        this.activateTab(tabList[0])
+        this.activateTab(tabList[activeTabMax])
 
         /* Activate a tab when you click its button */
         for (var i = 0; i < tabList.length; i++) {

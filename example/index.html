@@ -15,7 +15,7 @@
   </style>
 </head>
 <body>
-<h1><img src="http://symbiant.co.nz/images/symbiant_logo.png" style="max-height: 55px; float: right" />FIDS flight widget demo</h1>
+<h1>FIDS flight widget demo</h1>
 <div class="fids-flights"></div>
 
 
@@ -23,7 +23,6 @@
 
 (function (window, document) {
 
-  //TODO: new way of defining cols
   var columns = {
     arrivals: {
       est: {'label' : 'Est'}
@@ -40,14 +39,14 @@
       skin: 'fids-flat', // optional, leave blank for no skin
       airlineLogoColour: 'dark', //optional, 'light' or 'dark' defaults to dark, light maybe required when serving up the flight table on a dark background
       tabs: true, // optional, if true converts flight list into tabbed 'arrival/departure' tabs, otherwise tables display in list
-      activeTab: 1, //optional, will default to first tab (0 = departures) if not set 
+      activeTab: 0, //optional, will default to first tab (0 = departures) if not set 
       marquee: true, // optional, if true, and device width < 320px, codeshares scroll
       marqueeForce: false, // optional, if true, marquee iasalways on
       columns: columns,
       mode: 'dev' // optional, for dev use only, injects static <airport>.json
     };
     var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
-    script.src = "./../fids-flights.min.js";
+    script.src = "scripts/fids-flights.min.js";
     script.id = "fids-flights-script";
     script.setAttribute("data-options",JSON.stringify(options));
     tag.parentNode.insertBefore(script, tag);

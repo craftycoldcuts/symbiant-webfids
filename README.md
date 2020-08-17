@@ -1,47 +1,54 @@
 # FIDS flights JS widget
 
-Embeddabled widget which can be dropped into any approved host (hosts managed via nginx CORS headers).
+Embeddabled widget which can be dropped into any website. Widget displays arrival and departure flights for the specified airport.  
 
-Widget displays arrival and departure flights for the specified airport.
+To allow cross site orgin connection, approved hosts are managed via nginx CORS headers.
 
-## Building the widget - With local Node
+---
+
+## Building the minified widget
+
+### Building the widget - With local Node
 
 Assuming Node is installed, then install RequireJs like so:
 
-npm install requirejs -g
+`npm install requirejs -g`
 
 Then run:
 
-runbuildtasks.bat
+`runbuildtasks.bat`
 
 OR manually
 
-r.js.cmd -o cssIn=fids-flights.css out=fids-flights-min.css (optimises CSS)
-(drop the .cmd if using mac)
+`r.js.cmd -o cssIn=fids-flights.css out=fids-flights-min.css` (optimises CSS)
+Note: drop the .cmd if using mac
 
-r.js.cmd -o fids-flights.build.js (optimises JS)
+`r.js.cmd -o fids-flights.build.js` (optimises JS)
 
 
-## Building the widget - using Docker Node
+### Building the widget - using Docker Node
 
 Paths assume unix
 With Docker machine running:
 
-./build-widget.sh
+`./build-widget.sh`
 
 Note: for this, needs files: Dockerfile and package.json (required by the official Node image)
 
-## Embedding the widget on a site (external instructions)
+## Installing
 
-See include-script-all-browser.js.
+Embedding the widget on any external site.
 
+1. Host the `fids-flights.min.js` file on your site
+2. Copy the following script content `include-script-all-browser.js` on your site, making sure to update the `script.src` with your hosted file ^^.
+3. Add the following tag anywhere on your site, `<div class="fids-flights"></div>`
 
+### Example
 Example below (change script.src to hosted script, example .src below is for local dev)
-<script>
 
+```javascript
 (function (window, document) {
 
-// TODO: this is new and will change
   var columns = {
     arrivals: {
       date: {'label' : 'Date'}
@@ -62,8 +69,7 @@ Example below (change script.src to hosted script, example .src below is for loc
       tabs: true, // optional, if true converts flight list into tabbed 'arrival/departure' tabs, otherwise tables display in list
       marquee: true, // optional, if true, and device width < 320px, codeshares scroll
       marqueeForce: false, // optional, if true, marquee iasalways on
-      columns: columns,
-      mode: 'dev' // optional, for dev use only, injects static <airport>.json
+      columns: columns
     };
     var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
     script.src = "./../fids-flights.min.js";
@@ -73,4 +79,23 @@ Example below (change script.src to hosted script, example .src below is for loc
   };
   window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
 })(window, document);
-</script>
+```
+## Built With
+
+* [backbone.js](https://backbonejs.org/) - The web framework used
+* [RequireJs](https://requirejs.org/) - Web module loader and optimiser
+* [Handlebars](https://handlebarsjs.com/) - HTML Templating
+* [Node/NPM] - build tools
+
+## Authors
+
+* **Brad Owen**
+
+## License
+
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+
+- **[MIT license](http://opensource.org/licenses/mit-license.php)**
+- Copyright 2016 - Brad Owen
+
+

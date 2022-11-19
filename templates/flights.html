@@ -2,7 +2,7 @@
 
 	{{#if options.tabs}}<div class="fids-tabs">{{/if}}
 		{{#if options.tabs}}<div class="fids-tab">{{/if}}
-			{{#if options.tabs}}<a class="fids-tab-button" href="javascript:void(0)">Departures</a>{{/if}}
+			{{#if options.tabs}}<a class="fids-tab-button" href="javascript:void(0)">Departures{{#if (or options.tereo tereo)}} / Wehenga atu{{/if}}</a>{{/if}}
 			 {{#if options.tabs}}<div class="fids-tab-content">{{/if}}
 				<table class="fids-table" {{#if options.fontSize}}style="font-size: {{options.fontSize}}px"{{/if}}>
 					<colgroup class="fids-col-airline"</colgroup>
@@ -35,7 +35,7 @@
 									<img class="svg fids-airline-logo" src="{{airlineImage}}" title="{{airline}}" />
 								</td>
 								<td>
-									<div class="fids-city">{{city}}</div>
+									<div class="fids-city">{{#citiesEnglish this}}{{/citiesEnglish}}{{#if (or ../options.tereo ../tereo)}}<br/>{{#citiesTereo this}}{{/citiesTereo}}{{/if}}</div>
 									<div class="{{marquee}}">
 										<div class="fids-flight-no">{{flight_no}}</div>
 										{{#if codeshares.length}}<span>, </span><div class="fids-codeshares"><ul>{{#each codeshares}}<li>{{this}}</li>{{/each}}</ul></div>{{/if}}
@@ -62,7 +62,7 @@
 		{{#if options.tabs}}</div>{{/if}}
 
 		{{#if options.tabs}}<div class="fids-tab">{{/if}}
-			{{#if options.tabs}}<a class="fids-tab-button" href="javascript: void(0)">Arrivals</a>{{/if}}
+			{{#if options.tabs}}<a class="fids-tab-button" href="javascript: void(0)">Arrivals{{#if (or options.tereo tereo)}} / Taunga mai{{/if}}</a>{{/if}}
 			{{#if options.tabs}}<div class="fids-tab-content">{{/if}}
 				<table class="fids-table" {{#if options.fontSize}}style="font-size: {{options.fontSize}}px"{{/if}}>
 					<colgroup class="fids-col-airline"</colgroup>
@@ -95,7 +95,7 @@
 									<img class="fids-airline-logo" src="{{airlineImage}}" title="{{airline}}" />
 								</td>
 								<td>
-									<div class="fids-city">{{city}}</div>
+									<div class="fids-city">{{#citiesEnglish this}}{{/citiesEnglish}}{{#if (or ../options.tereo ../tereo)}}<br/>{{#citiesTereo this}}{{/citiesTereo}}{{/if}}</div>
 									<div class="{{marquee}}">
 										<div class="fids-flight-no">{{flight_no}}</div>
 										{{#if codeshares.length}}<span>, </span><div class="fids-codeshares"><ul>{{#each codeshares}}<li>{{this}}</li>{{/each}}</ul></div>{{/if}}

@@ -153,6 +153,55 @@ function ($fids, _, Backbone, Handlebars, tabs, tipr, flightsTemplate, css) {
     return "";
   });
 
+  Handlebars.registerHelper({
+    eq: (v1, v2) => v1 === v2,
+    ne: (v1, v2) => v1 !== v2,
+    lt: (v1, v2) => v1 < v2,
+    gt: (v1, v2) => v1 > v2,
+    lte: (v1, v2) => v1 <= v2,
+    gte: (v1, v2) => v1 >= v2,
+    and() {
+        return Array.prototype.every.call(arguments, Boolean);
+    },
+    or() {
+        return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
+    }
+});
+
+// special helpers to support multistop cities 
+
+Handlebars.registerHelper('citiesEnglish', function () {
+  var context = this;
+  var returnString = "";
+
+  if (context.cities === undefined) {
+    return returnString;
+  }
+
+  if (context.citieslength === 0) {
+    return context.cities[0];
+  } else {
+    return context.cities.join(" / ")
+  }
+
+});
+
+  Handlebars.registerHelper('citiesTereo', function () {
+    var context = this;
+    var returnString = "";
+
+    if (context.cities_tereo === undefined) {
+      return returnString;
+    }
+
+    if (context.cities_tereo.length === 0) {
+      return context.cities_tereo[0];
+    } else {
+      return context.cities_tereo.join(" / ")
+    }
+
+  });
+
   /* HANDLEBARS HELPERS - END */
 
   Backbone.sync = function (method, model, options) {
